@@ -1,7 +1,7 @@
 Opencart API
 ================
 
-Opencart extension based in opencart-webapi (ethernet1), using functions list from API2CART.
+Opencart extension for remotely work with the OpenCart 1.5.+ via the REST API, coding style based in opencart-webapi (ethernet1), using functions list style from API2CART.
 
 Functions
 -------
@@ -21,6 +21,7 @@ Category Management Functions
 Customer Management Functions
 
 * `customer.get`: Return full Customer information (by ID, Email or Token).
+* `customer.add`: Add new customer to the store. Return ID.
 
 Roadmap
 -------
@@ -36,11 +37,25 @@ Product Management Functions
 
 Customer Management Functions
 
-* `customer.list // customer.find`: Get customers list with limited information.
+* `customer.list`: Get customers list with limited information.
 
 Store Management Functions
 
+* `store.get`:
+
+Information Management Functions
+
+* `information.get`:
+
+Cart Management Functions
+
 Order Management Functions
+
+* `order.get`
+* `order.list`
+* `order.count`
+* `order.add`
+* `order.update`
 
 License
 -------
