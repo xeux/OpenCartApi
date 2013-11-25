@@ -23,6 +23,14 @@ Customer Management Functions
 * `customer.get`: Return full Customer information (by ID, Email or Token).
 * `customer.add`: Add new customer to the store. Return ID.
 
+Store Management Functions
+
+* `store.get`: Return store config parameters.
+
+Information Management Functions
+
+* `information.get`: Return information from page by ID
+
 Roadmap
 -------
 
@@ -38,14 +46,6 @@ Product Management Functions
 Customer Management Functions
 
 * `customer.list`: Get customers list with limited information.
-
-Store Management Functions
-
-* `store.get`:
-
-Information Management Functions
-
-* `information.get`:
 
 Cart Management Functions
 
