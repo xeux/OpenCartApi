@@ -54,7 +54,7 @@ class ControllerApiCustomer extends Controller {
     }
     
     public function _list() {
-        $this->load->model('account/customer');
+        $this->load->model('sale/customer');
         $json = array('success' => true, 'customers' => array());
         
         # -- $_GET params ------------------------------
@@ -65,7 +65,7 @@ class ControllerApiCustomer extends Controller {
         }
         # -- End $_GET params --------------------------
 
-        $customers = $this->model_account_customer->getCustomers(array(
+        $customers = $this->model_sale_customer->getCustomers(array(
             //'filter_name'        => ''
         ));
         
@@ -78,6 +78,45 @@ class ControllerApiCustomer extends Controller {
             );
         }
                 
+        $this->response->setOutput(json_encode($json));
+    }
+    
+    public function _add() {
+        $this->load->model('account/customer');
+        $json = array('success' => true, 'result' => array());
+        
+        # -- $_GET params ------------------------------
+        if (isset($this->request->get['firstname'])) {
+            $data['firstname'] = $this->request->get['firstname'];
+        }
+        if (isset($this->request->get['lastname'])) {
+            $data['lastname'] = $this->request->get['lastname'];
+        }
+        if (isset($this->request->get['email'])) {
+            $data['email'] = $this->request->get['email'];
+        }
+        if (isset($this->request->get['password'])) {
+            $data['password'] = $this->request->get['password'];
+        }
+        $data['telephone'] = '';
+        $data['fax'] = '';
+        $data['company'] = '';
+        $data['company_id'] = '';
+        $data['tax_id'] = '';
+        $data['address_1'] = '';
+        $data['address_2'] = '';
+        $data['city'] = '';
+        $data['postcode'] = '';
+        $data['country_id'] = '';
+        $data['zone_id'] = '';
+        # -- End $_GET params --------------------------
+        
+        if ($data) {
+            $this->model_account_customer->addCustomer($data);
+            $customer = $this->model_account_customer->getCustomerByEmail($data['email']);
+            $json['result'] = $customer['customer_id'];
+        }
+        
         $this->response->setOutput(json_encode($json));
     }
     
