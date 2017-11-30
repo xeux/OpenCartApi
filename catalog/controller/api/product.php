@@ -1,9 +1,23 @@
 <?php
-
 class ControllerApiProduct extends Controller {
-    
     private $debug = false;
-    
+
+    // TODO: fix
+    public function _add($productData = array()) {
+		// Assoc array of data
+		// $productData = array(
+		//	'name' => 'Product Name Here',
+		//	'model' => 'ABC123',
+		//	...
+		//);
+		
+		// Load model into memory if it isn't already
+		$this->load->model('catalog/product');
+		
+		// Attempt to pass the assoc array to the add Product method
+        $this->model_catalog_product->addProduct($productData);
+    }
+
     public function _get() {
         $this->load->model('catalog/product');
         $this->load->model('tool/image');
@@ -54,7 +68,7 @@ class ControllerApiProduct extends Controller {
             );
         }
 
-        #options
+        // options
         $options = array();
 
         foreach ($this->model_catalog_product->getProductOptions($product['product_id']) as $option) {
@@ -170,7 +184,7 @@ class ControllerApiProduct extends Controller {
         $this->load->model('tool/image');
         $json = array('success' => true, 'products' => array());
         
-        # -- $_GET params ------------------------------
+        // -- $_GET params ------------------------------
         if (isset($this->request->get['category'])) {
             $category_id = $this->request->get['category'];
         } else {
@@ -206,16 +220,16 @@ class ControllerApiProduct extends Controller {
         $this->load->model('tool/image');
         $json = array('success' => true, 'result' => '');
         
-        # -- $_GET params ------------------------------
+        // -- $_GET params ------------------------------
         if (isset($this->request->get['category'])) {
             $category_id = $this->request->get['category'];
         } else {
             $category_id = 0;
         }
-        # -- End $_GET params --------------------------
+        // -- End $_GET params --------------------------
         
         $products = $this->model_catalog_product->getTotalProducts(array(
-            'filter_category_id'        => $category_id
+            'filter_category_id' => $category_id
         ));
         
         $json['result'] = $products;
@@ -227,7 +241,4 @@ class ControllerApiProduct extends Controller {
         //call_user_func(array($this, str_replace('.', '_', $methodName)), $arguments);
         call_user_func(array($this, "_$methodName"), $arguments);
     }
-    
-}
-
-?>
+ }
